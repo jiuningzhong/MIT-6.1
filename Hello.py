@@ -64,3 +64,7 @@ sorted([2,4,3,5,1,7,98,93,6])
 
 sorted(data, key=lambda item: item['first'])
 sorted(data, key=lambda item: item['YOB'])
+
+add = lambda x, y: x + y
+add(1, 2)
+
