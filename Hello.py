@@ -10,16 +10,13 @@ print(msg)
 type(5)
 print(3.0-1)
 
-
 spam = 0
 while spam < 5:
     print('Hello, world.')
     spam = spam + 1
 
-
 L = [1,3,5,1,2,3,4,5]
 L.sort()
-
 
 L = []
 nmax = 30
@@ -36,14 +33,12 @@ print(L)
 def real_imag_conj(val):
     return val.real, val.imag, val.conjugate()
 
-
 def fibonacci(N, a=0, b=1):
     L = []
     while len(L) < N:
         a, b = b, a + b
         L.append(a)
     return L
-
 
 def catch_all(*args, **kwargs):
     print("args =", args)
