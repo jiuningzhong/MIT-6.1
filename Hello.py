@@ -72,7 +72,7 @@ def safe_divide(a,b):
 safe_divide(1,0)
 safe_divide(1,'a')
 
-def fibonacci(N):
+def fibonacci_non_negative(N):
     if N < 0:
         raise ValueError("N must be non-negative")
     L = []
@@ -82,7 +82,7 @@ def fibonacci(N):
         L.append(a)
     return L
 
-fibonacci(-10)
+fibonacci_non_negative(-10)
 
 N = -10
 try:
@@ -100,7 +100,7 @@ except ZeroDivisionError as err:
 class MySpecialError(ValueError):
     pass
 
-raise MySpecialError("here's the message")
+# raise MySpecialError("here's the message")
 
 try:
     print("do something")
@@ -111,4 +111,18 @@ except MySpecialError:
 for i in range(10):
     print(i, end=' ')
     # print('\n')
+
+try:
+    print("try something here")
+except:
+    print("this happens only if it fails")
+else:
+    print("this happens only if it succeeds")
+finally:
+    print("this happens no matter what")
+
+
+
+
+
 
