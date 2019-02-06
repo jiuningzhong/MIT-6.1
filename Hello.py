@@ -108,10 +108,12 @@ try:
 except MySpecialError:
     print("do something else")
 
+# Iterators
 for i in range(10):
-    print(i, end=' ')
+    print(i, end=' \n')
     # print('\n')
 
+# try…except…else…finally
 try:
     print("try something here")
 except:
@@ -121,8 +123,78 @@ else:
 finally:
     print("this happens no matter what")
 
+# Iterating over lists
+for value in [2, 4, 6, 8, 10]:
+    # do some operation
+    print(value + 1, end=' \n')
 
+I = iter([2, 4, 6, 8, 10])
+print(next(I))
+print(next(I))
+print(next(I))
+print(next(I))
+print(next(I))
 
+# range(): A List Is Not Always a List
+range(10)
 
+for i in range(10):
+    print(i, end=' ')
 
+N = 10 ** 12
+for i in range(N):
+    if i >= 10: break
+    print(i, end=', ')
 
+# Useful Iterators
+L = [2, 4, 6, 8, 10]
+for i in range(len(L)):
+    print(i, L[i])
+
+# enumerate iterator
+for i, val in enumerate(L):
+    print(i, val)
+
+# zip iterator
+L = [2, 4, 6, 8, 10]
+R = [3, 6, 9, 12, 15]
+for lval, rval in zip(L, R):
+    print(lval, rval)
+
+# find the first 10 square numbers
+# The map iterator takes a function 
+# and applies it to the values in an iterator
+square = lambda x: x ** 2
+for val in map(square, range(10)):
+    print(val, end=' ')
+
+# find values up to 10 for which x % 2 is zero
+# filter iterator looks similar, except it only passes through values
+# for which the filter function evaluates to True
+is_even = lambda x: x % 2 == 0
+for val in filter(is_even, range(10)):
+    print(val, end=' ')
+
+# *args and **kwargs can be used to 
+# pass sequences and dictionaries to functions
+# The operative difference is the asterisk characters:
+# a single * before a variable means “expand this as a sequence”, while
+# a double ** before a variable means “expand this as a dictionary”.
+
+print(*range(10))
+
+print(*map(lambda x: x ** 2, range(10)))
+
+L1 = (1, 2, 3, 4)
+L2 = ('a', 'b', 'c', 'd')
+z = zip(L1, L2)
+print(*z)
+
+z = zip(L1, L2)
+new_L1, new_L2 = zip(*z)
+print(new_L1, new_L2)
+
+# iterates over all permutations of a sequence
+from itertools import permutations
+p = permutations(range(3))
+print(*p)
