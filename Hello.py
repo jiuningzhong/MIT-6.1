@@ -198,3 +198,19 @@ print(new_L1, new_L2)
 from itertools import permutations
 p = permutations(range(3))
 print(*p)
+
+# Python Variables Are Pointers
+x = [1, 2, 3]
+y = x
+print(y)
+x.append(4) # append 4 to the list pointed to by x
+print(y) # y's list is modified as well!
+
+x=4
+y=x
+x = 'something else'
+# Note also that if we use = to assign another value to x, this will not
+# affect the value of y—assignment is simply a change of what object
+# the variable points to
+print(y) # y is unchanged
+
