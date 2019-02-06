@@ -20,7 +20,7 @@ def Towers(n, fr, to, spare):
         Towers(1, fr, to, spare)
         Towers(n-1, spare, to, fr)
 
-#print(Towers(4, 'P1', 'P2', 'P3'))
+print(Towers(4, 'P1', 'P2', 'P3'))
 
 #####################################
 # EXAMPLE:  fibonacci
@@ -33,6 +33,8 @@ def fib(x):
         return 1
     else:
         return fib(x-1) + fib(x-2)
+
+fib(5)
         
 #####################################
 # EXAMPLE:  testing for palindromes
@@ -56,11 +58,11 @@ def isPalindrome(s):
 
     return isPal(toChars(s))
 
-#print(isPalindrome('eve'))
-#
-#print(isPalindrome('Able was I, ere I saw Elba'))
-#
-#print(isPalindrome('Is this a palindrome'))
+print(isPalindrome('eve'))
+
+print(isPalindrome('Able was I, ere I saw Elba'))
+
+print(isPalindrome('Is this a palindrome'))
 
 #####################################
 # EXAMPLE: using dictionaries

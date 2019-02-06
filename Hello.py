@@ -194,10 +194,6 @@ z = zip(L1, L2)
 new_L1, new_L2 = zip(*z)
 print(new_L1, new_L2)
 
-# iterates over all permutations of a sequence
-from itertools import permutations
-p = permutations(range(3))
-print(*p)
 
 # Python Variables Are Pointers
 x = [1, 2, 3]
@@ -214,3 +210,44 @@ x = 'something else'
 # the variable points to
 print(y) # y is unchanged
 
+
+# iterates over all permutations of a sequence
+from itertools import permutations
+p = permutations(range(3))
+print(*p)
+
+from itertools import combinations
+c = combinations(range(4), 2)
+print(*c)
+
+from itertools import product
+p = product('ab', range(3))
+print(*p)
+
+# List Comprehensions
+[i for i in range(20) if i % 3 > 0]
+
+# Basic List Comprehensions
+L = []
+for n in range(12):
+    L.append(n ** 2)
+L
+
+[n**2 for n in range(12)]
+
+# Multiple Iteration
+[(i, j) for i in range(2) for j in range(3)]
+
+# Conditions on the Iterator
+[val for val in range(20) if val % 3 > 0]
+
+# what we’re doing is constructing a list, leaving out multiples of 3,
+# and negating all multiples of 2.
+[val if val % 2 else -val for val in range(20) if val % 3]
+
+{a % 3 for a in range(1000)}
+
+# generator expression:
+# a list comprehension in which
+# elements are generated as needed rather than all at once
+print(n**2 for n in range(12))
