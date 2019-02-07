@@ -107,7 +107,7 @@ try:
     raise MySpecialError("[informative error message here]")
 except MySpecialError:
     print("do something else")
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Iterators
 for i in range(10):
     print(i, end=' \n')
@@ -175,6 +175,7 @@ is_even = lambda x: x % 2 == 0
 for val in filter(is_even, range(10)):
     print(val, end=' ')
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # *args and **kwargs can be used to 
 # pass sequences and dictionaries to functions
 # The operative difference is the asterisk characters:
@@ -194,7 +195,7 @@ z = zip(L1, L2)
 new_L1, new_L2 = zip(*z)
 print(new_L1, new_L2)
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Python Variables Are Pointers
 x = [1, 2, 3]
 y = x
@@ -209,7 +210,7 @@ x = 'something else'
 # affect the value of y—assignment is simply a change of what object
 # the variable points to
 print(y) # y is unchanged
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # iterates over all permutations of a sequence
 from itertools import permutations
@@ -224,6 +225,7 @@ from itertools import product
 p = product('ab', range(3))
 print(*p)
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # List Comprehensions
 [i for i in range(20) if i % 3 > 0]
 
@@ -246,8 +248,290 @@ L
 [val if val % 2 else -val for val in range(20) if val % 3]
 
 {a % 3 for a in range(1000)}
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # generator expression:
 # a list comprehension in which
 # elements are generated as needed rather than all at once
 print(n**2 for n in range(12))
+
+
+# 1. List comprehensions use square brackets, 
+# while generator expressions use parentheses
+
+# to print the contents of a generator expression is
+# to pass it to the list constructor
+list(n**2 for n in range(12))
+
+# 2. A list is a collection of values, 
+# while a generator is a recipe for producing values
+L = [n ** 2 for n in range(12)]
+for val in L:
+    print(val, end=' ')
+
+# generator expression does not actually compute
+# the values until they are needed.
+G = (n ** 2 for n in range(12))
+for val in G:
+    print(val, end=' ')
+
+# The count iterator will go on happily counting forever until you tell
+# it to stop; this makes it convenient to create generators that will also
+# go on forever:
+from itertools import count
+factors = [2, 3, 5, 7]
+G = (i for i in count() if all(i % n > 0 for n in factors))
+for val in G:
+    print(val, end=' ')
+    if val > 40: break
+
+# 3. A list can be iterated multiple times; a generator expression is single use
+L = [n ** 2 for n in range(12)]
+for val in L:
+    print(val, end=' ')
+
+for val in L:
+    print(val, end=' ')
+print()
+
+G = (n ** 2 for n in range(12))
+# print(*G)
+# print(*G)
+
+list(G)
+list(G)
+
+# This can be very useful 
+# because it means iteration can be stopped and started:
+G = (n**2 for n in range(12))
+for n in G:
+    print(n, end=' ')
+    if n > 30: break
+print("\ndoing something in between")
+
+for n in G:
+    print(n, end=' ')
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Generator Functions: Using yield
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+L1 = [n ** 2 for n in range(12)]
+L2 = []
+for n in range(12):
+    L2.append(n ** 2)
+
+print(L1)
+print(L2)
+
+G1 = (n ** 2 for n in range(12))
+def gen():
+    for n in range(12):
+        yield n ** 2
+G2 = gen()
+print(*G1)
+print(*G2)
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Generators -> Example: Prime Number Generator
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Generate a list of candidates
+L = [n for n in range(2, 40)]
+print(L)
+
+# Remove all multiples of the first value
+L = [n for n in L if n == L[0] or n % L[0] > 0]
+print(L)
+
+# Remove all multiples of the second value
+L = [n for n in L if n == L[1] or n % L[1] > 0]
+print(L)
+
+# Remove all multiples of the third value
+L = [n for n in L if n == L[2] or n % L[2] > 0]
+print(L)
+
+def gen_primes(N):
+# """Generate primes up to N"""
+    primes = set()
+    for n in range(2, N):
+        if all(n % p > 0 for p in primes):
+            primes.add(n)
+            yield n
+
+print(*gen_primes(70))
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Modules and Packages
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Loading Modules: the import Statement
+# Explicit module import
+import math
+math.cos(math.pi)
+# Explicit module import by alias
+import numpy as np
+np.cos(np.pi)
+# Explicit import of module contents
+from math import cos, pi
+cos(pi)
+# Implicit import of module contents
+from math import *
+sin(pi) ** 2 + cos(pi) ** 2
+
+from numpy import *
+sum(range(5), -1)
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# String Manipulation and Regular Expressions
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+multiline = """
+one
+two
+three
+"""
+
+fox = "tHe qUICk bROWn fOx."
+fox.upper()
+fox.lower()
+fox.title()
+fox.capitalize()
+fox.swapcase()
+
+# Formatting strings: Adding and removing spaces
+line = ' this is the content '
+line.strip()
+line.rstrip()
+line.lstrip()
+
+num = "000000000000435"
+num.strip('0')
+
+line = "this is the content"
+line.center(30)
+line.ljust(30)
+line.rjust(30)
+
+'435'.rjust(10, '0')
+# right-pad a string with zeros
+'435'.zfill(10)
+
+# Finding and replacing substrings
+# 
+line = 'the quick brown fox jumped over a lazy dog'
+line.find('fox')
+line.index('fox')
+line.find('bear')
+# not found: index() raises a ValueError
+line.index('bear')
+
+line.rfind('a')
+
+line.endswith('dog')
+line.startswith('fox')
+
+# The replace() function returns a new string
+line.replace('brown', 'red')
+line.replace('o', '--')
+
+# Splitting and partitioning strings
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

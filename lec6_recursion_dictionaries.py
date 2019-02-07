@@ -155,7 +155,7 @@ def words_often(freqs, minTimes):
             done = True
     return result
     
-#print(words_often(beatles, 5))
+print(words_often(beatles, 5))
 
 #####################################
 # EXAMPLE: comparing fibonacci using memoization
@@ -176,15 +176,16 @@ def fib_efficient(n, d):
         return d[n]
     else:
         ans = fib_efficient(n-1, d)+fib_efficient(n-2, d)
+        print(d)
         d[n] = ans
         return ans
-        
 d = {1:1, 2:2}
 
-argToUse = 34
-#print("")
-#print('using fib')
-#print(fib(argToUse))
-#print("")
-#print('using fib_efficient')
-#print(fib_efficient(argToUse, d))
+argToUse = 50
+print("")
+print('using fib_efficient')
+print(fib_efficient(argToUse, d))
+
+print("")
+print('using fib')
+print(fib(argToUse))

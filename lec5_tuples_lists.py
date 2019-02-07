@@ -153,6 +153,7 @@ print(brightcolors)
 ###############################
 def remove_dups(L1, L2):
     for e in L1:
+        print(e)
         if e in L2:
             L1.remove(e)
       
