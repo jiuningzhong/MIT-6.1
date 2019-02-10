@@ -437,9 +437,135 @@ line.replace('o', '--')
 
 # Splitting and partitioning strings
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# A more sophisticated example
+import re
+email = re.compile('\w+@\w+\.[a-z]{3}')
+text = "To email Guido, try guido@python.org \
+or the older address guido@google.com."
+email.findall(text)
+
+email.sub('--@--.--', text)
+
+email.findall('barack.obama@whitehouse.gov')
+
+# Basics of regular expression syntax
+
+# Simple strings are matched directly
+regex = re.compile('ion')
+regex.findall('Great Expectations')
+
+# Some characters have special meanings
+# r preface in r'\$' indicates a raw string
+# the backslash is used to indicate special characters.
+regex = re.compile(r'\$')
+
+regex.findall("the cost is $20")
+
+print('a\tb\tc')
+print(r'a\tb\tc')
+
+# Special characters can match character groups.
+# the character \w, which is a
+# special marker matching any alphanumeric character.
+# \s, a special marker indicating
+# any whitespace character.
+
+regex = re.compile(r'\w\s\w')
+regex.findall('the fox is 9 years old')
+
+# Square brackets match custom character groups
+# match any lowercase vowel
+regex = re.compile('[aeiou]')
+regex.split('consequential')
+
 # 
+regex = re.compile('[A-Z][0-9]')
+regex.findall('1043879, G2, H6')
+
+# Wildcards match repeated characters.
+regex = re.compile(r'\w{3}')
+regex.findall('The quick brown fox')
+
+regex = re.compile(r'\w+')
+regex.findall('The quick brown fox')
+
+email = re.compile(r'\w+@\w+\.[a-z]{3}')
+email2 = re.compile(r'[\w.]+@\w+\.[a-z]{3}')
+email2.findall('barack.obama@whitehouse.gov')
+
+# Parentheses indicate groups to extract
+email3 = re.compile(r'([\w.]+)@(\w+)\.([a-z]{3})')
+text = "To email Guido, try guido@python.org"\
+"or the older address guido@google.com."
+email3.findall(text)
+
+email4 = re.compile(r'(?P<user>[\w.]+)@(?P<domain>\w+)'\
+'\.(?P<suffix>[a-z]{3})')
+match = email4.match('guido@python.org')
+match.groupdict()
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# A Preview of Data Science Tools
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# NumPy: Numerical Python
+import numpy as np
+x = np.arange(1, 10)
+x
+x ** 2
+
+# reshape our x array into a 3x3 array
+M = x.reshape((3, 3))
+M
+
+# transpose using .T
+M.T
+
+# a matrix-vector product using np.dot
+# [5*1+2*6+3*7, 4*5+5*6+6*7, 7*5+8*6+9*7]
+np.dot(M, [5, 6, 7])
+
+# eigenvalue decomposition
+np.linalg.eigvals(M)
+
+# Pandas: Labeled Column-Oriented Data
+# Pandas is a much newer package than NumPy, 
+# and is in fact built on top of it
+import pandas as pd
+df = pd.DataFrame({'label': ['A', 'B', 'C', 'A', 'B', 'C'],
+'value': [1, 2, 3, 4, 5, 6]})
+df
+df['label']
+df['label'].str.lower()
+df['value']
+df['value'].sum()
+
+df.groupby('label').sum()
+
+# Matplotlib: MATLAB-style scientific visualization
+
+# run this if using Jupyter notebook
+
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
+x = np.linspace(0, 10) # range of values from 0 to 10
+y = np.sin(x) # sine of these values
+plt.plot(x, y); # plot as a line
+
+# SciPy: Scientific Python
+from scipy import interpolate
+# choose eight points between 0 and 10
+x = np.linspace(0, 10, 8)
+y = np.sin(x)
+# create a cubic interpolation function
+func = interpolate.interp1d(x, y, kind='cubic')
+# interpolate on a grid of 1,000 points
+x_interp = np.linspace(0, 10, 1000)
+y_interp = func(x_interp)
+# plot the results
+plt.figure() # new figure
+plt.plot(x, y, 'o')
+plt.plot(x_interp, y_interp);
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 

@@ -1,18 +1,25 @@
 ########################################
+### Classes of Tests
+### Unit tsting: testing each function
+### Regression testing: catch reintroduced
+### Integration testing: overall program
+########################################
+
+########################################
 ### EXAMPLE: Buggy code to reverse a list
 ### Try to debug it! (fixes needed are explained below)
 ########################################
-##def rev_list_buggy(L):
-##    """
-##    input: L, a list
-##    Modifies L such that its elements are in reverse order
-##    returns: nothing
-##    """
-##    for i in range(len(L)):
-##        j = len(L) - i
-##        L[i] = temp
-##        L[i] = L[j]
-##        L[j] = L[i]
+def rev_list_buggy(L):
+   """
+   input: L, a list
+   Modifies L such that its elements are in reverse order
+   returns: nothing
+   """
+   for i in range(len(L)):
+       j = len(L) - i
+       L[i] = temp
+       L[i] = L[j]
+       L[j] = L[i]
 #
 ## FIXES: --------------------------
 ## temp unknown
@@ -40,21 +47,21 @@ print(L)
 ### EXAMPLE: Buggy code to get a list of primes
 ### Try to debug it! (fixes needed are explained below)
 ########################################
-##def primes_list_buggy(n):
-##    """
-##    input: n an integer > 1
-##    returns: list of all the primes up to and including n
-##    """
-##    # initialize primes list
-##    if i == 2:
-##        primes.append(2)
-##    # go through each elem of primes list
-##    for i in range(len(primes)):
-##        # go through each of 2...n
-##        for j in range(len(n)):
-##            # check if not divisible by elem of list
-##            if i%j != 0:
-##                primes.append(i)
+def primes_list_buggy(n):
+   """
+   input: n an integer > 1
+   returns: list of all the primes up to and including n
+   """
+   # initialize primes list
+   if i == 2:
+       primes.append(2)
+   # go through each elem of primes list
+   for i in range(len(primes)):
+       # go through each of 2...n
+       for j in range(len(n)):
+           # check if not divisible by elem of list
+           if i%j != 0:
+               primes.append(i)
 #
 #
 ## FIXES: --------------------------
@@ -156,7 +163,7 @@ def get_stats(class_list):
 	return new_stats 
 
 # avg function: version without an exception
-#def avg(grades):
+# def avg(grades):
 #    return (sum(grades))/len(grades)
     
 # avg function: version with an exception
@@ -170,13 +177,12 @@ def avg(grades):
 
 # avg function: version with assert
 def avg(grades):
-    assert len(grades) != 0, 'warning: no grades data'
+    assert not len(grades) == 0, 'no grades data'
     return sum(grades)/len(grades)
 
     
 test_grades = [[['peter', 'parker'], [80.0, 70.0, 85.0]], 
               [['bruce', 'wayne'], [100.0, 80.0, 74.0]],
-              [['captain', 'america'], [80.0, 70.0, 96.0]],
-              [['deadpool'], []]]
-
+              [['captain', 'america'], [80.0, 70.0, 96.0]]]
+              
 print(get_stats(test_grades))
